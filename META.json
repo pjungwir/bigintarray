@@ -1,0 +1,28 @@
+{
+  "name": "bigintarray",
+  "abstract": "Functions, operators, and index support for 1-D arrays of bigints",
+  "version": "1.0.0",
+  "maintainer": "Paul A. Jungwirth <pj@illuminatedcomputing.com>",
+  "license": "postgresql",
+  "provides": {
+    "bigintarray": {
+      "abstract": "Functions, operators, and index support for 1-D arrays of bigints",
+      "file": "bigintarray--1.0.sql",
+      "docfile": "README.md",
+      "version": "1.0.0"
+    }
+  },
+  "resources": {
+    "repository": {
+      "url": "git://github.com/pjungwir/bigintarray.git",
+      "web": "https://github.com/pjungwir/bigintarray",
+      "type": "git"
+    }
+  },
+  "generated_by": "Paul A. Jungwirth",
+  "meta-spec": {
+    "version": "1.0.0",
+    "url": "http://pgxn.org/meta/spec.txt"
+  },
+  "tags": ["arrays", "bigint", "intarray", "gist", "gin"]
+}

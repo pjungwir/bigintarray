@@ -24,6 +24,8 @@ Then in your database:
 CREATE EXTENSION bigintarray;
 ```
 
+`bigintarray` is a trusted extension (like `intarray`), so you don't have to be a superuser to install it.
+
 ## Functions
 
 | Function | Return Type | Description |

@@ -113,8 +113,7 @@ CREATE INDEX ON mytable USING gin (arr_column gin__bigint_ops);
 
 ## Compatibility
 
-This extension supports PostgreSQL versions 10 through 18. The `numranges` and
-`siglen` opclass options require PostgreSQL 13 or later.
+This extension supports PostgreSQL versions 13 through 18.
 
 ## Author
 

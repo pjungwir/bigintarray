@@ -470,37 +470,18 @@ AS
 	FUNCTION	4	ginint8_consistent (internal, int2, _int8, int4, internal, internal, internal, internal),
 	STORAGE		int8;
 
--- Conditionally add opclass options if PG >= 13
-DO $d$
-DECLARE
-	modpath text;
-BEGIN
-	IF current_setting('server_version_num')::integer >= 130000 THEN
-		SELECT probin INTO modpath FROM pg_proc
-			WHERE proname = '_bigint_contains' LIMIT 1;
+CREATE FUNCTION g_bigint_options(internal)
+RETURNS void
+AS 'MODULE_PATHNAME'
+LANGUAGE C IMMUTABLE PARALLEL SAFE;
 
-		EXECUTE format($e$
-			CREATE FUNCTION g_bigint_options(internal)
-			RETURNS void
-			AS %L, 'g_bigint_options'
-			LANGUAGE C IMMUTABLE PARALLEL SAFE
-		$e$, modpath);
+CREATE FUNCTION g_bigintbig_options(internal)
+RETURNS void
+AS 'MODULE_PATHNAME'
+LANGUAGE C IMMUTABLE PARALLEL SAFE;
 
-		EXECUTE format($e$
-			CREATE FUNCTION g_bigintbig_options(internal)
-			RETURNS void
-			AS %L, 'g_bigintbig_options'
-			LANGUAGE C IMMUTABLE PARALLEL SAFE
-		$e$, modpath);
+ALTER OPERATOR FAMILY gist__bigint_ops USING gist
+ADD FUNCTION 10 (_int8) g_bigint_options (internal);
 
-		EXECUTE $e$
-			ALTER OPERATOR FAMILY gist__bigint_ops USING gist
-			ADD FUNCTION 10 (_int8) g_bigint_options (internal)
-		$e$;
-
-		EXECUTE $e$
-			ALTER OPERATOR FAMILY gist__bigintbig_ops USING gist
-			ADD FUNCTION 10 (_int8) g_bigintbig_options (internal)
-		$e$;
-	END IF;
-END $d$;
+ALTER OPERATOR FAMILY gist__bigintbig_ops USING gist
+ADD FUNCTION 10 (_int8) g_bigintbig_options (internal);

@@ -17,13 +17,7 @@
 #include "utils/lsyscache.h"
 #include "utils/selfuncs.h"
 
-#if PG_VERSION_NUM >= 110000
 #include "utils/fmgrprotos.h"
-#else
-/* PG10 doesn't have fmgrprotos.h; declare needed functions */
-extern Datum arraycontsel(PG_FUNCTION_ARGS);
-extern Datum arraycontjoinsel(PG_FUNCTION_ARGS);
-#endif
 
 PG_FUNCTION_INFO_V1(_bigint_overlap_sel);
 PG_FUNCTION_INFO_V1(_bigint_contains_sel);

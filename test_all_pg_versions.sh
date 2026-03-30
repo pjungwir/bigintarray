@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Build, install, and test bigintarray against PostgreSQL versions 10-18
+# Build, install, and test bigintarray against PostgreSQL versions 13-18
 # using pgenv-managed instances (no sudo required).
 #
 # Prerequisites:
@@ -9,13 +9,13 @@
 #        export PATH="$HOME/.pgenv/bin:$HOME/.pgenv/pgsql/bin:$PATH"
 #
 #   2. Build each major version (latest patch) with pgenv:
-#        pgenv build 10.23
-#        pgenv build 11.22
+#        pgenv build 13.23
+#        pgenv build 14.22
 #        ...
 #        pgenv build 18.3
 #
 #   The script discovers which versions are installed under ~/.pgenv/
-#   and runs each one on port 15410-15418 (15400 + major version).
+#   and runs each one on port 15413-15418 (15400 + major version).
 #
 # Usage: ./test_all_pg_versions.sh [--only-build | --only-test] [--versions "16 17 18"]
 #
@@ -46,7 +46,7 @@ cd "$SCRIPT_DIR"
 PGENV_ROOT="${PGENV_ROOT:-$HOME/.pgenv}"
 export PATH="$PGENV_ROOT/bin:$PGENV_ROOT/pgsql/bin:$PATH"
 
-VERSIONS="${CUSTOM_VERSIONS:-10 11 12 13 14 15 16 17 18}"
+VERSIONS="${CUSTOM_VERSIONS:-13 14 15 16 17 18}"
 PORT_BASE=15400
 
 PASS=()

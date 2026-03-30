@@ -25,13 +25,9 @@
 #define G_BIGINT_NUMRANGES_MAX			((GISTMaxIndexKeySize - VARHDRSZ) / \
 										 (2 * sizeof(int64)))
 
-#if PG_VERSION_NUM >= 130000
 #define G_BIGINT_GET_NUMRANGES()	(PG_HAS_OPCLASS_OPTIONS() ? \
 									 ((GISTBigintArrayOptions *) PG_GET_OPCLASS_OPTIONS())->num_ranges : \
 									 G_BIGINT_NUMRANGES_DEFAULT)
-#else
-#define G_BIGINT_GET_NUMRANGES()	G_BIGINT_NUMRANGES_DEFAULT
-#endif
 
 /* gist__bigint_ops opclass options */
 typedef struct
@@ -79,13 +75,9 @@ typedef struct
 #define SIGLEN_MAX			GISTMaxIndexKeySize
 #define SIGLENBIT(siglen)	((siglen) * BITS_PER_BYTE)
 
-#if PG_VERSION_NUM >= 130000
 #define GET_SIGLEN()		(PG_HAS_OPCLASS_OPTIONS() ? \
 							 ((GISTBigintArrayBigOptions *) PG_GET_OPCLASS_OPTIONS())->siglen : \
 							 SIGLEN_DEFAULT)
-#else
-#define GET_SIGLEN()		SIGLEN_DEFAULT
-#endif
 
 typedef char *BITVECP;
 

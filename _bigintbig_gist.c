@@ -5,9 +5,7 @@
 
 #include "_bigint.h"
 #include "access/gist.h"
-#if PG_VERSION_NUM >= 130000
 #include "access/reloptions.h"
-#endif
 #include "access/stratnum.h"
 
 #define GETENTRY(vec,pos) ((GISTTYPE *) DatumGetPointer((vec)->vector[(pos)].key))
@@ -21,9 +19,7 @@ PG_FUNCTION_INFO_V1(g_bigintbig_penalty);
 PG_FUNCTION_INFO_V1(g_bigintbig_picksplit);
 PG_FUNCTION_INFO_V1(g_bigintbig_union);
 PG_FUNCTION_INFO_V1(g_bigintbig_same);
-#if PG_VERSION_NUM >= 130000
 PG_FUNCTION_INFO_V1(g_bigintbig_options);
-#endif
 
 PG_FUNCTION_INFO_V1(_bigintbig_in);
 PG_FUNCTION_INFO_V1(_bigintbig_out);
@@ -623,7 +619,6 @@ g_bigintbig_consistent(PG_FUNCTION_ARGS)
 	PG_RETURN_BOOL(retval);
 }
 
-#if PG_VERSION_NUM >= 130000
 Datum
 g_bigintbig_options(PG_FUNCTION_ARGS)
 {
@@ -637,4 +632,3 @@ g_bigintbig_options(PG_FUNCTION_ARGS)
 
 	PG_RETURN_VOID();
 }
-#endif
